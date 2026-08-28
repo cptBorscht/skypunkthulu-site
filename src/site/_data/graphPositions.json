@@ -1,0 +1,130 @@
+{
+  "NPCs/Alonzo Montemerrat": {
+    "x": 576.7649536132812,
+    "y": 1352.4246826171875
+  },
+  "NPCs/Bardle Shanksworth": {
+    "x": -80.30009460449219,
+    "y": -56.79707717895508
+  },
+  "NPCs/Cyndil _Jessie_ Trueshot": {
+    "x": 592.6211547851562,
+    "y": -254.27407836914062
+  },
+  "NPCs/Doc Furn": {
+    "x": 451.5816345214844,
+    "y": 1075.507080078125
+  },
+  "NPCs/Dream-Priestess Fiona": {
+    "x": 791.3932495117188,
+    "y": 488.7646179199219
+  },
+  "NPCs/Elba Zabili": {
+    "x": 840.2446899414062,
+    "y": 1137.376708984375
+  },
+  "NPCs/Gehir Greencloak": {
+    "x": -312.98052978515625,
+    "y": 770.561279296875
+  },
+  "NPCs/Goldy Lafferty": {
+    "x": 1030.4495849609375,
+    "y": -770.299560546875
+  },
+  "NPCs/Granny Smith": {
+    "x": 998.2722778320312,
+    "y": -430.43035888671875
+  },
+  "NPCs/Gwando Psychadelic": {
+    "x": 259.775634765625,
+    "y": -1329.1607666015625
+  },
+  "NPCs/High Magister Miranda Montemerrat": {
+    "x": 178.2288818359375,
+    "y": 1291.2740478515625
+  },
+  "NPCs/Hox": {
+    "x": 607.2676391601562,
+    "y": -1194.010498046875
+  },
+  "NPCs/Jaleeda D'soun": {
+    "x": 1271.017578125,
+    "y": -330.786865234375
+  },
+  "NPCs/Kibana Kubernetes": {
+    "x": 1357.6202392578125,
+    "y": -777.3074340820312
+  },
+  "NPCs/Lady Kree": {
+    "x": 1070.3165283203125,
+    "y": 503.779052734375
+  },
+  "NPCs/Redrick, Son of Redrickson": {
+    "x": 843.0104370117188,
+    "y": -606.3003540039062
+  },
+  "NPCs/Valentine Lafferty": {
+    "x": 1385.205810546875,
+    "y": -502.1390075683594
+  },
+  "NPCs/Bernice Weekend AKA Smarts": {
+    "x": 457.0419921875,
+    "y": -674.2293701171875
+  },
+  "Active/Espionage in Izel": {
+    "x": -21.09185218811035,
+    "y": -486.8229675292969
+  },
+  "Active/Find Kovo's Hidden Stash": {
+    "x": 699.71240234375,
+    "y": -37.72166442871094
+  },
+  "Active/Fuck Off and Start A Zoo": {
+    "x": -741.8789672851562,
+    "y": -583.4874877929688
+  },
+  "Active/Mysterious Bal Bal Deck": {
+    "x": -495.875244140625,
+    "y": -160.05885314941406
+  },
+  "Active/Orphan Crushing Machine": {
+    "x": 254.28982543945312,
+    "y": 788.8075561523438
+  },
+  "Active/Project Joining": {
+    "x": 53.907894134521484,
+    "y": 639.7300415039062
+  },
+  "Active/Read Fiona's Books": {
+    "x": 1058.2503662109375,
+    "y": 846.38818359375
+  },
+  "Active/Research the Occulare": {
+    "x": 379.6096496582031,
+    "y": -108.84011840820312
+  },
+  "Active/The Cult of Marcus": {
+    "x": 185.80050659179688,
+    "y": -906.8806762695312
+  },
+  "Active/Uncover Your Origins": {
+    "x": 521.838134765625,
+    "y": 198.8313446044922
+  },
+  "Active/Unlock the Brass Capsule": {
+    "x": 890.16845703125,
+    "y": 241.90538024902344
+  },
+  "Active/Unlock the Power to Stop Time": {
+    "x": -326.5056457519531,
+    "y": -900.1556396484375
+  },
+  "Active/Where's the Collosus Going": {
+    "x": -173.2155303955078,
+    "y": 230.93968200683594
+  },
+  "Active/Why Are They After Elba": {
+    "x": 708.431396484375,
+    "y": 800.3661499023438
+  }
+}

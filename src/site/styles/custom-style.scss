@@ -11,3 +11,70 @@ body {
     //   color: black;
     //  }
 }
+
+/* ---------------------------------------------------------------------------
+ * Attitude snapshots
+ *
+ * The read-only counterpart to the vault's Attitude Colors slider: where an
+ * NPC stood with the crew at publish time. Hue is set inline so it matches the
+ * plugin's 0-red to 100-green mapping exactly.
+ * ------------------------------------------------------------------------- */
+
+.attitude-snapshot {
+  margin: 0.4em 0 1.2em;
+}
+
+.attitude-snapshot__scale {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.attitude-snapshot__end {
+  font-size: 0.8em;
+  opacity: 0.65;
+  white-space: nowrap;
+}
+
+.attitude-snapshot__end:first-child { color: hsl(0, 75%, 45%); }
+.attitude-snapshot__end:last-child  { color: hsl(120, 75%, 45%); }
+
+.attitude-snapshot__track {
+  position: relative;
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    hsl(0, 75%, 45%),
+    hsl(60, 75%, 45%),
+    hsl(120, 75%, 45%)
+  );
+  opacity: 0.55;
+}
+
+.attitude-snapshot__marker {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  border: 2px solid var(--background-primary, #1e1e1e);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+.attitude-snapshot__value {
+  margin-top: 0.35em;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+.attitude-snapshot--missing {
+  font-size: 0.85em;
+  opacity: 0.6;
+}
+
+/* Hidden rows in a filtered shop table. */
+.markdown-preview-view tr[hidden] { display: none; }

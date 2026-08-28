@@ -152,16 +152,47 @@ function renderGraph(graphData, containerId, isFullScreen) {
     }));
     const links = graphData.links.map(l => ({ source: l.source, target: l.target }));
 
+    // Nodes carrying coordinates hand-placed in the vault's graph get pinned
+    // here. The saved coordinate space is fitted to whatever size this canvas
+    // happens to be, so the arrangement keeps its shape in the sidebar and
+    // full-screen alike. Notes with no saved position are left to the
+    // simulation and settle in around the anchored ones.
+    const anchored = nodes.filter(n => typeof n.savedX === 'number' && typeof n.savedY === 'number');
+    const useSavedLayout = anchored.length > 1;
+    if (useSavedLayout) {
+        const xs = anchored.map(n => n.savedX);
+        const ys = anchored.map(n => n.savedY);
+        const minX = Math.min(...xs), maxX = Math.max(...xs);
+        const minY = Math.min(...ys), maxY = Math.max(...ys);
+        const pad = isFullScreen ? 60 : 24;
+        const scale = Math.min(
+            (width - pad * 2) / (maxX - minX || 1),
+            (height - pad * 2) / (maxY - minY || 1)
+        );
+        const offsetX = (width - (maxX - minX) * scale) / 2 - minX * scale;
+        const offsetY = (height - (maxY - minY) * scale) / 2 - minY * scale;
+        for (const n of anchored) {
+            n.savedFx = n.fx = n.x = n.savedX * scale + offsetX;
+            n.savedFy = n.fy = n.y = n.savedY * scale + offsetY;
+        }
+    }
+
     // D3 Force Simulation — stronger repel for full graph to spread nodes
     const chargeStrength = isFullScreen ? -300 : -100;
     const linkDist = isFullScreen ? 80 : 40;
     const radius = Math.min(width, height) / 3;
     const simulation = forceSimulation(nodes)
         .force('charge', forceManyBody().strength(chargeStrength))
-        .force('center', forceCenter(width / 2, height / 2).strength(0.5))
         .force('link', forceLink(links).id(d => d.id).distance(linkDist))
-        .force('collide', forceCollide(d => nodeRadius(d.id, degreeMap) + 1).iterations(3))
-        .force('radial', forceRadial(radius, width / 2, height / 2).strength(0.05));
+        .force('collide', forceCollide(d => nodeRadius(d.id, degreeMap) + 1).iterations(3));
+    // Centering and radial pull drag everything toward the middle, which would
+    // pull the unpinned nodes off the saved arrangement. They only apply when
+    // there is no saved layout to respect.
+    if (!useSavedLayout) {
+        simulation
+            .force('center', forceCenter(width / 2, height / 2).strength(0.5))
+            .force('radial', forceRadial(radius, width / 2, height / 2).strength(0.05));
+    }
 
     // Pixi v7 Application (synchronous constructor)
     const app = new Application({
@@ -331,8 +362,10 @@ function renderGraph(graphData, containerId, isFullScreen) {
             .on('end', function (event) {
                 if (!event.active) simulation.alphaTarget(0);
                 const node = event.subject.node;
-                node.fx = null;
-                node.fy = null;
+                // an anchored node springs back to where it was placed in the
+                // vault; everything else is handed back to the simulation
+                node.fx = node.savedFx !== undefined ? node.savedFx : null;
+                node.fy = node.savedFy !== undefined ? node.savedFy : null;
                 dragging = false;
 
                 const dt = Date.now() - dragStartTime;
