@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/unlock-the-brass-capsule/","dg-note-properties":{"completed":true}}
+{"dg-publish":true,"permalink":"/active/unlock-the-brass-capsule/","dg-note-properties":{"completed":true,"hideInGraph":true}}
 ---
 
 
