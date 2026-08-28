@@ -2,6 +2,26 @@
 // its own setup, so anything registered here wins - and survives pulling
 // updates from upstream.
 
+const fs = require("fs");
+const path = require("path");
+
+const NOTES_DIR = path.join(__dirname, "../site/notes");
+const ATTITUDE_KEY = "attitude";
+
+// 0 is red, 100 is green - the same mapping the vault's Attitude Colors plugin
+// uses, so a number looks the same on the site as it does in Obsidian.
+function attitudeColor(value) {
+  return `hsl(${Math.round(value * 1.2)}, 75%, 45%)`;
+}
+
+function readAttitude(source) {
+  if (!source || typeof source !== "object") return null;
+  const key = Object.keys(source).find(k => k.toLowerCase() === ATTITUDE_KEY);
+  if (key === undefined) return null;
+  const value = Number(source[key]);
+  return isNaN(value) ? null : Math.max(0, Math.min(100, value));
+}
+
 // ---------------------------------------------------------------------------
 // ```attitude``` blocks
 //
@@ -9,21 +29,12 @@
 // slider bound to the note's Attitude property. A published page has no plugin
 // and nothing to write back to, so it gets the read-only equivalent: a snapshot
 // of where that NPC stood with the crew when the note was last published.
-//
-// The hue matches the plugin exactly - 0 is red, 100 is green - so the site and
-// the vault's file explorer agree on what "80" looks like.
 // ---------------------------------------------------------------------------
 
-const ATTITUDE_KEY = "attitude";
-
 function attitudeOf(env) {
-  const sources = [env && env["dg-note-properties"], env];
-  for (const source of sources) {
-    if (!source || typeof source !== "object") continue;
-    const key = Object.keys(source).find(k => k.toLowerCase() === ATTITUDE_KEY);
-    if (key === undefined) continue;
-    const value = Number(source[key]);
-    if (!isNaN(value)) return Math.max(0, Math.min(100, value));
+  for (const source of [env && env["dg-note-properties"], env]) {
+    const value = readAttitude(source);
+    if (value !== null) return value;
   }
   return null;
 }
@@ -42,8 +53,7 @@ function renderAttitude(value) {
   if (value === null) {
     return `<div class="attitude-snapshot attitude-snapshot--missing">No attitude recorded.</div>`;
   }
-  const hue = Math.round(value * 1.2);
-  const color = `hsl(${hue}, 75%, 45%)`;
+  const color = attitudeColor(value);
   return `<div class="attitude-snapshot" role="img" aria-label="Attitude ${value} of 100: ${attitudeLabel(value)}">
   <div class="attitude-snapshot__scale">
     <span class="attitude-snapshot__end">Hostile</span>
@@ -64,6 +74,67 @@ function userMarkdownSetup(md) {
     }
     return previous(tokens, idx, options, env, slf);
   };
+}
+
+// ---------------------------------------------------------------------------
+// Attitude colours in the file tree
+//
+// The vault plugin tints note titles in the File Explorer by attitude. The
+// sidebar here is the same idea, so it gets the same treatment: one CSS rule
+// per NPC, keyed on the permalink its link already carries. Doing it as
+// generated CSS keeps the file tree template untouched. The !important is to
+// beat the template rule that repaints the active note in the plain text
+// colour - an NPC should read as their attitude on their own page too.
+// ---------------------------------------------------------------------------
+
+function collectAttitudes(dir, found = []) {
+  let entries;
+  try {
+    entries = fs.readdirSync(dir, { withFileTypes: true });
+  } catch (e) {
+    return found;
+  }
+
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      collectAttitudes(full, found);
+      continue;
+    }
+    if (!entry.name.endsWith(".md")) continue;
+
+    // published notes carry a single line of JSON as their frontmatter
+    const match = fs.readFileSync(full, "utf8").match(/^---\r?\n(.*?)\r?\n---/s);
+    if (!match) continue;
+
+    let data;
+    try {
+      data = JSON.parse(match[1]);
+    } catch (e) {
+      continue;
+    }
+
+    const value = readAttitude(data["dg-note-properties"]);
+    if (value !== null && data.permalink) {
+      found.push({ permalink: data.permalink, value });
+    }
+  }
+  return found;
+}
+
+let attitudeStyleCache = null;
+
+function attitudeStyleTag() {
+  if (attitudeStyleCache !== null) return attitudeStyleCache;
+
+  const rules = collectAttitudes(NOTES_DIR).map(({ permalink, value }) =>
+    `.filetree-sidebar a.filename[href="${permalink}"] { color: ${attitudeColor(value)} !important; }`
+  );
+
+  attitudeStyleCache = rules.length
+    ? `<style>\n${rules.join("\n")}\n</style>`
+    : "";
+  return attitudeStyleCache;
 }
 
 // ---------------------------------------------------------------------------
@@ -116,6 +187,19 @@ const FILTER_SCRIPT = `<script>
 </script>`;
 
 function userEleventySetup(eleventyConfig) {
+  // notes change between builds in --watch; the colours must follow
+  eleventyConfig.on("eleventy.before", () => {
+    attitudeStyleCache = null;
+  });
+
+  eleventyConfig.addTransform("attitude-filetree-colors", function (content) {
+    const outputPath = this.page && this.page.outputPath;
+    if (!outputPath || !outputPath.endsWith(".html")) return content;
+
+    const style = attitudeStyleTag();
+    return style ? content.replace("</head>", style + "</head>") : content;
+  });
+
   eleventyConfig.addTransform("itemshop-filter", function (content) {
     const outputPath = this.page && this.page.outputPath;
     if (!outputPath || !outputPath.endsWith(".html")) return content;
