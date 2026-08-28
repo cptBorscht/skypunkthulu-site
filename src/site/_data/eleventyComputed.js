@@ -96,9 +96,18 @@ function isCompleted(data) {
 
 // getFileTree honours dg-path over the real folder, so this is all it takes to
 // shelve a quest under Completed and, when unticked, bring it back.
+//
+// The last path segment becomes this note's key in the tree, so it has to be
+// unique. title and fileSlug are not resolved yet while computed data is being
+// built, and two quests both keyed "undefined.md" silently overwrite each
+// other - the second one wins and the first vanishes from the tree entirely.
+// filePathStem is core Eleventy data and always present, so the file's own
+// name does the job.
 function completedPath(data) {
   if (!isCompleted(data)) return data["dg-path"];
-  return "Completed/" + (data.title || data.fileSlug) + ".md";
+  const stem = data.page && data.page.filePathStem;
+  const name = stem ? stem.split("/").pop() : data.title || data.fileSlug;
+  return "Completed/" + name + ".md";
 }
 
 async function buildGraph(data) {
