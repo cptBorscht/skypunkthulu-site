@@ -119,13 +119,36 @@ function collectNoteState(dir, found = []) {
     if (!data.permalink) continue;
 
     const props = data["dg-note-properties"];
+
+    // the garden entry is served at the root, not at its own permalink
+    const isEntry = Array.isArray(data.tags) && data.tags.includes("gardenEntry");
+
     found.push({
       permalink: data.permalink,
+      url: isEntry ? "/" : data.permalink,
       attitude: readAttitude(props),
       completed: !!(props && props.completed === true),
+      hideInSearch: !!(props && props.hideInSearch === true),
     });
   }
   return found;
+}
+
+// ---------------------------------------------------------------------------
+// Keeping notes out of search
+//
+// The template's own notHidden filter feeds both the search index and the RSS
+// feed, so using it would quietly drop the note from the feed as well. Pruning
+// the finished index instead keeps the change to the one thing that was asked
+// for. Flag a note with hideInSearch in its frontmatter to use it.
+// ---------------------------------------------------------------------------
+
+function searchHiddenUrls() {
+  return new Set(
+    collectNoteState(NOTES_DIR)
+      .filter(n => n.hideInSearch)
+      .map(n => n.url)
+  );
 }
 
 let noteStyleCache = null;
@@ -213,6 +236,22 @@ function userEleventySetup(eleventyConfig) {
 
     const style = noteStyleTag();
     return style ? content.replace("</head>", style + "</head>") : content;
+  });
+
+  eleventyConfig.addTransform("search-index-prune", function (content) {
+    const outputPath = this.page && this.page.outputPath;
+    if (!outputPath || !outputPath.endsWith("searchIndex.json")) return content;
+
+    const hidden = searchHiddenUrls();
+    if (hidden.size === 0) return content;
+
+    try {
+      const entries = JSON.parse(content);
+      return JSON.stringify(entries.filter(entry => !hidden.has(entry.url)));
+    } catch (e) {
+      // a malformed index is the template's business, not ours - leave it be
+      return content;
+    }
   });
 
   eleventyConfig.addTransform("itemshop-filter", function (content) {

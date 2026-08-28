@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/skypunkthulu/","title":"Skypunkthulu","tags":["gardenEntry"],"dg-note-properties":{"hideInGraph":true,"title":"Skypunkthulu"}}
+{"dg-publish":true,"permalink":"/skypunkthulu/","title":"Skypunkthulu","tags":["gardenEntry"],"dg-note-properties":{"hideInGraph":true,"title":"Skypunkthulu","hideInSearch":true}}
 ---
 
 
