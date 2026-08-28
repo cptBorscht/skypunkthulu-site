@@ -86,6 +86,24 @@ function filterLocalGraphData(graphData, depth) {
     };
 }
 
+// Depth is not a factor on this site. The campaign graph is small and laid out
+// by hand in the vault, so every page shows the whole of it with the current
+// note highlighted - a BFS neighbourhood would reshuffle the arrangement from
+// page to page and lose the thing that makes a hand-placed layout worth having.
+function campaignGraphData(graphData) {
+    const data = filterFullGraphData(graphData);
+    if (!data) return null;
+
+    const currentLink = decodeURI(window.location.pathname);
+    const lower = currentLink.toLowerCase();
+    const currentNode =
+        data.nodes.find(n => n.url === currentLink) ||
+        data.nodes.find(n => n.url && n.url.toLowerCase() === lower);
+    if (currentNode) currentNode.current = true;
+
+    return data;
+}
+
 function getCssVar(variable) {
     return getComputedStyle(document.body).getPropertyValue(variable).trim();
 }
@@ -494,7 +512,7 @@ function renderLocal() {
         localGraphCleanup();
         localGraphCleanup = null;
     }
-    const data = filterLocalGraphData(graphDataCache, localGraphDepth);
+    const data = campaignGraphData(graphDataCache);
     const cleanup = renderGraph(data, 'link-graph', false);
     localGraphCleanup = cleanup;
 }
@@ -521,7 +539,7 @@ function openFullGraph() {
 }
 
 function openExpandedLocal() {
-    openModal(filterLocalGraphData(graphDataCache, localGraphDepth));
+    openModal(campaignGraphData(graphDataCache));
 }
 
 function closeFullGraph() {

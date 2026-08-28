@@ -4,8 +4,10 @@
 // Run after rearranging the graph in Obsidian:
 //   node scripts/sync-graph-positions.js [path/to/vault]
 //
-// Entries that aren't real notes (tags like #SideQuest, unresolved links like
-// "Izel") are dropped - the site graph only ever has nodes for published notes.
+// Note paths are keyed without their extension, matching the filePathStem the
+// site builds note URLs from. Tag nodes (#MainQuest, #SideQuest) keep their
+// leading hash and are matched by name. Unresolved links - graph nodes in the
+// vault for notes that do not exist, like "Izel" - are dropped.
 
 const fs = require("fs");
 const path = require("path");
@@ -24,12 +26,11 @@ const { nodePositions = [] } = JSON.parse(fs.readFileSync(source, "utf8"));
 const positions = {};
 let dropped = 0;
 for (const { id, x, y } of nodePositions) {
-  if (!id.endsWith(".md")) { dropped++; continue; }
-  // key by vault path without extension - matches the filePathStem the site
-  // builds its note URLs from
-  positions[id.slice(0, -3)] = { x, y };
+  if (id.endsWith(".md")) positions[id.slice(0, -3)] = { x, y };
+  else if (id.startsWith("#")) positions[id] = { x, y };
+  else dropped++;
 }
 
 fs.writeFileSync(target, JSON.stringify(positions, null, 2) + "\n");
 console.log(`${Object.keys(positions).length} positions written to ${path.relative(process.cwd(), target)}`);
-if (dropped) console.log(`${dropped} non-note entries skipped (tags, unresolved links)`);
+if (dropped) console.log(`${dropped} unresolved-link entries skipped`);
