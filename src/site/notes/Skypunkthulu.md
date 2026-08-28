@@ -5,16 +5,20 @@
 
 # Skypunkthulu
 
-A skyfaring campaign of airships, eldritch commerce, and people who mostly
-mean well. This garden is the crew's shared reference: what you can buy, who
-you have met, and what you are still tangled up in.
+Not malicious, not not malicious, Eldritch Beings came to a mutual enough symbiosis with the denizens of the new Skyaia.
 
-Start with the shops — they are the part you will reach for at the table.
+Some theorize Their power holds up the very sky-continents, and work to  understand and cooperate with Them.  Others plot to rid the universe of these things - to restore the universe and undo the Cataclysm.  Like every epoch of civilization's history, most just do what they have to do to survive.
+
+Offering worship, sometimes genuine, sometimes well-enough feigned, we sustain these Strange Beings.  and Skyaian people get Eldritch technology made of brass and energy.  With magic in the hands of many, civilization and science now reshaped, the civilizations of Skyaia are thriving, and changing.
+
+The magic and the physical, ever in a strange dance, now yield the strangest times, and the Calamity not a millennium behind us.. The time may come yet that we feel the Cataclysm's aftershocks.**
+
+This garden is the crew's shared reference: what you can buy, who
+you have met, and what you are still tangled up in.
 
 ## The Item Shop
 
-Every storefront carries live prices and stock drawn from the campaign's
-sourcebooks. Use the filter box on any catalog to search by name.
+All "Shops" and all shops from the city you're in will be fair game in session. Use the filter box on any catalog to search by name. Ctrl + K search is very useful on this site.
 
 ### Skyaia & Mythos storefronts
 
