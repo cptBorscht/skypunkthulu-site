@@ -18,7 +18,6 @@ sourcebooks. Use the filter box on any catalog to search by name.
 
 ### Skyaia & Mythos storefronts
 
-- [[Item Shop/Shops/(Reference Only) Full Catalog\|(Reference Only) Full Catalog]]
 - [[Item Shop/Shops/Ace Zapix's Zap Guns\|Ace Zapix's Zap Guns]]
 - [[Item Shop/Shops/Biomechanical Enhancination\|Biomechanical Enhancination]]
 - [[Item Shop/Shops/Blackpowder & Brass\|Blackpowder & Brass]]
@@ -31,7 +30,6 @@ sourcebooks. Use the filter box on any catalog to search by name.
 
 ### Goa Zo — the Southlands markets
 
-- [[Item Shop/Goa Zo Shops/Goa Zo Full Catalog\|Goa Zo Full Catalog]]
 - [[Item Shop/Goa Zo Shops/The Chirurgeon's Hollow\|The Chirurgeon's Hollow]]
 - [[Item Shop/Goa Zo Shops/The Ivory Balance\|The Ivory Balance]]
 - [[Item Shop/Goa Zo Shops/The Long Market\|The Long Market]]
