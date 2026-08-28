@@ -77,17 +77,20 @@ function userMarkdownSetup(md) {
 }
 
 // ---------------------------------------------------------------------------
-// Attitude colours in the file tree
+// Per-note styling driven by published frontmatter
 //
 // The vault plugin tints note titles in the File Explorer by attitude. The
 // sidebar here is the same idea, so it gets the same treatment: one CSS rule
 // per NPC, keyed on the permalink its link already carries. Doing it as
-// generated CSS keeps the file tree template untouched. The !important is to
+// generated CSS keeps the file tree template untouched. A completed quest is
+// struck through wherever it is linked, which matters most on the home page:
+// its "Threads Still Open" list is fixed text written at publish time and
+// would otherwise keep advertising finished business. The !important is to
 // beat the template rule that repaints the active note in the plain text
 // colour - an NPC should read as their attitude on their own page too.
 // ---------------------------------------------------------------------------
 
-function collectAttitudes(dir, found = []) {
+function collectNoteState(dir, found = []) {
   let entries;
   try {
     entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -98,7 +101,7 @@ function collectAttitudes(dir, found = []) {
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      collectAttitudes(full, found);
+      collectNoteState(full, found);
       continue;
     }
     if (!entry.name.endsWith(".md")) continue;
@@ -113,28 +116,40 @@ function collectAttitudes(dir, found = []) {
     } catch (e) {
       continue;
     }
+    if (!data.permalink) continue;
 
-    const value = readAttitude(data["dg-note-properties"]);
-    if (value !== null && data.permalink) {
-      found.push({ permalink: data.permalink, value });
-    }
+    const props = data["dg-note-properties"];
+    found.push({
+      permalink: data.permalink,
+      attitude: readAttitude(props),
+      completed: !!(props && props.completed === true),
+    });
   }
   return found;
 }
 
-let attitudeStyleCache = null;
+let noteStyleCache = null;
 
-function attitudeStyleTag() {
-  if (attitudeStyleCache !== null) return attitudeStyleCache;
+function noteStyleTag() {
+  if (noteStyleCache !== null) return noteStyleCache;
 
-  const rules = collectAttitudes(NOTES_DIR).map(({ permalink, value }) =>
-    `.filetree-sidebar a.filename[href="${permalink}"] { color: ${attitudeColor(value)} !important; }`
-  );
+  const rules = [];
+  for (const { permalink, attitude, completed } of collectNoteState(NOTES_DIR)) {
+    if (attitude !== null) {
+      rules.push(
+        `.filetree-sidebar a.filename[href="${permalink}"] { color: ${attitudeColor(attitude)} !important; }`
+      );
+    }
+    if (completed) {
+      // the file tree writes text-decoration:none inline, hence !important
+      rules.push(
+        `a[href="${permalink}"] { text-decoration: line-through !important; opacity: 0.55; }`
+      );
+    }
+  }
 
-  attitudeStyleCache = rules.length
-    ? `<style>\n${rules.join("\n")}\n</style>`
-    : "";
-  return attitudeStyleCache;
+  noteStyleCache = rules.length ? `<style>\n${rules.join("\n")}\n</style>` : "";
+  return noteStyleCache;
 }
 
 // ---------------------------------------------------------------------------
@@ -189,14 +204,14 @@ const FILTER_SCRIPT = `<script>
 function userEleventySetup(eleventyConfig) {
   // notes change between builds in --watch; the colours must follow
   eleventyConfig.on("eleventy.before", () => {
-    attitudeStyleCache = null;
+    noteStyleCache = null;
   });
 
-  eleventyConfig.addTransform("attitude-filetree-colors", function (content) {
+  eleventyConfig.addTransform("note-state-styles", function (content) {
     const outputPath = this.page && this.page.outputPath;
     if (!outputPath || !outputPath.endsWith(".html")) return content;
 
-    const style = attitudeStyleTag();
+    const style = noteStyleTag();
     return style ? content.replace("</head>", style + "</head>") : content;
   });
 

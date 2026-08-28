@@ -79,6 +79,28 @@ function applySavedPositions(graph, notes) {
   }
 }
 
+
+// ---------------------------------------------------------------------------
+// Completed quests
+//
+// A quest is marked done by ticking the "completed" property in Obsidian,
+// which renders as a checkbox in the note properties. The file itself stays
+// in Active/ - only its place in the file tree moves - so permalinks, inbound
+// links and saved graph positions all survive being completed and uncompleted.
+// ---------------------------------------------------------------------------
+
+function isCompleted(data) {
+  const props = data["dg-note-properties"];
+  return !!(props && props.completed === true);
+}
+
+// getFileTree honours dg-path over the real folder, so this is all it takes to
+// shelve a quest under Completed and, when unticked, bring it back.
+function completedPath(data) {
+  if (!isCompleted(data)) return data["dg-path"];
+  return "Completed/" + (data.title || data.fileSlug) + ".md";
+}
+
 async function buildGraph(data) {
   const graph = await getGraph(data);
   const notes = (data.collections && data.collections.note) || [];
@@ -97,5 +119,7 @@ module.exports = {
   graph: async (data) => await buildGraph(data),
   filetree: (data) => getFileTree(data),
   userComputed: (data) => userComputed(data),
-  noteProps: (data) => data["dg-note-properties"]
+  noteProps: (data) => data["dg-note-properties"],
+  completed: (data) => isCompleted(data),
+  "dg-path": (data) => completedPath(data)
 };
