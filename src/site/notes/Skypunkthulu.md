@@ -1,9 +1,6 @@
 ---
-{"dg-publish":true,"permalink":"/skypunkthulu/","title":"Skypunkthulu","tags":["gardenEntry"],"dg-note-properties":{"hideInGraph":true,"title":"Skypunkthulu","hideInSearch":true}}
+{"dg-publish":true,"permalink":"/skypunkthulu/","title":"Skypunkthulu","tags":["gardenEntry"],"dg-note-properties":{"hideInGraph":true,"hideInSearch":true,"title":"Skypunkthulu"}}
 ---
-
-
-# Skypunkthulu
 
 Not malicious, not not malicious, Eldritch Beings came to a mutual enough symbiosis with the denizens of the new Skyaia.
 
