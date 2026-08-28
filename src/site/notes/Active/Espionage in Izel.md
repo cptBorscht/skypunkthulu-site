@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/espionage-in-izel/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/active/espionage-in-izel/","dg-note-properties":{"completed":false}}
 ---
 
 

@@ -62,20 +62,20 @@ hostile red through to allied green. They shift between sessions.
 
 ## Threads Still Open
 
-- [[Active/Espionage in Izel\|Espionage in Izel]]
-- [[Active/Find Kovo's Hidden Stash\|Find Kovo's Hidden Stash]]
-- [[Active/Fuck Off and Start A Zoo\|Fuck Off and Start A Zoo]]
-- [[Active/Mysterious Bal Bal Deck\|Mysterious Bal Bal Deck]]
-- [[Active/Orphan Crushing Machine\|Orphan Crushing Machine]]
-- [[Active/Project Joining\|Project Joining]]
-- [[Active/Read Fiona's Books\|Read Fiona's Books]]
-- [[Active/Research the Occulare\|Research the Occulare]]
-- [[Active/The Cult of Marcus\|The Cult of Marcus]]
-- [[Active/Uncover Your Origins\|Uncover Your Origins]]
-- [[Active/Unlock the Brass Capsule\|Unlock the Brass Capsule]]
-- [[Active/Unlock the Power to Stop Time\|Unlock the Power to Stop Time]]
-- [[Active/Where's the Collosus Going\|Where's the Collosus Going]]
-- [[Active/Why Are They After Elba\|Why Are They After Elba]]
+- [[DM/Espionage in Izel\|Espionage in Izel]]
+- [[DM/Find Kovo's Hidden Stash\|Find Kovo's Hidden Stash]]
+- [[DM/Fuck Off and Start A Zoo\|Fuck Off and Start A Zoo]]
+- [[DM/Mysterious Bal Bal Deck\|Mysterious Bal Bal Deck]]
+- [[DM/Orphan Crushing Machine\|Orphan Crushing Machine]]
+- [[DM/Project Joining\|Project Joining]]
+- [[DM/Read Fiona's Books\|Read Fiona's Books]]
+- [[DM/Research the Occulare\|Research the Occulare]]
+- [[DM/The Cult of Marcus\|The Cult of Marcus]]
+- [[DM/Uncover Your Origins\|Uncover Your Origins]]
+- [[DM/Unlock the Brass Capsule\|Unlock the Brass Capsule]]
+- [[DM/Unlock the Power to Stop Time\|Unlock the Power to Stop Time]]
+- [[DM/Where's the Collosus Going\|Where's the Collosus Going]]
+- [[DM/Why Are They After Elba\|Why Are They After Elba]]
 
 ---
 

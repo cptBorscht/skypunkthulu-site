@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/orphan-crushing-machine/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/active/orphan-crushing-machine/","dg-note-properties":{"completed":false}}
 ---
 
 

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/why-are-they-after-elba/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/active/why-are-they-after-elba/","dg-note-properties":{"completed":false}}
 ---
 
 

@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/find-kovo-s-hidden-stash/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/active/find-kovo-s-hidden-stash/","dg-note-properties":{"completed":false}}
 ---
 
 

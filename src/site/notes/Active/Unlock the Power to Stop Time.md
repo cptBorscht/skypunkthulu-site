@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/unlock-the-power-to-stop-time/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/active/unlock-the-power-to-stop-time/","dg-note-properties":{"completed":false}}
 ---
 
 

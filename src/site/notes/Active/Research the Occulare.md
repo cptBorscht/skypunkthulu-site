@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/research-the-occulare/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/active/research-the-occulare/","dg-note-properties":{"completed":false}}
 ---
 
 

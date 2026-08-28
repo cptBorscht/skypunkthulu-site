@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/project-joining/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/active/project-joining/","dg-note-properties":{"completed":false}}
 ---
 
 

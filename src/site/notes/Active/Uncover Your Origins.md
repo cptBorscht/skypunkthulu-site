@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/uncover-your-origins/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/active/uncover-your-origins/","dg-note-properties":{"completed":true}}
 ---
 
 

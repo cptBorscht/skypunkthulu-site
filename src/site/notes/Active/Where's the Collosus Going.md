@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/where-s-the-collosus-going/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/active/where-s-the-collosus-going/","dg-note-properties":{"completed":false}}
 ---
 
 

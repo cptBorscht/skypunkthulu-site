@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/the-cult-of-marcus/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/active/the-cult-of-marcus/","dg-note-properties":{"completed":false}}
 ---
 
 

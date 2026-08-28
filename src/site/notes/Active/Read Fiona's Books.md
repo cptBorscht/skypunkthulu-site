@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/read-fiona-s-books/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/active/read-fiona-s-books/","dg-note-properties":{"completed":false}}
 ---
 
 

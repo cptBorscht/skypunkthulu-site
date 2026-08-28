@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/active/mysterious-bal-bal-deck/","dg-note-properties":{}}
+{"dg-publish":true,"permalink":"/active/mysterious-bal-bal-deck/","dg-note-properties":{"completed":false}}
 ---
 
 
