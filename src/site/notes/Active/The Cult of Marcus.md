@@ -12,3 +12,8 @@ Influential Recruits (each recruits 1d10 people per month, each)
 [[NPCs/Gwando Psychadelic\|Gwando Psychadelic]]
 [[NPCs/Bernice Weekend AKA Smarts\|Bernice Weekend AKA Smarts]]
 
+
+| Week Of        | Gwando | Bernice | Hox |
+| -------------- | ------ | ------- | --- |
+| Monsoon Jan 6  | 10     | 0       | 0   |
+| Monsoon Jan 11 |        | 3       |     |
