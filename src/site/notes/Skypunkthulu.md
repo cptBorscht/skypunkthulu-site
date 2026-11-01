@@ -63,6 +63,20 @@ hostile red through to allied green. They shift between sessions.
 
 ## Threads Still Open
 
+
+<div class="transclusion internal-embed is-loaded"><div class="markdown-embed">
+
+
+
+
+
+> [!important] Current Quest
+> [[Active/Research the Occulare\|Research the Occulare]]
+
+
+</div></div>
+
+
 - [[Active/Espionage in Izel\|Espionage in Izel]]
 - [[Active/Find Kovo's Hidden Stash\|Find Kovo's Hidden Stash]]
 - [[Active/Fuck Off and Start A Zoo\|Fuck Off and Start A Zoo]]
